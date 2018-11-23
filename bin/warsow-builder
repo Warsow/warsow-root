@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+cd "$(dirname ${0})/.."
+
+source src/argparse.sh
+source src/main.sh
+source src/modules.sh
+source src/util.sh
+
+hash rsync git make cmake
+
+if has-args "-c" "--clean"; then
+  clean-warsow-folder
+  exit 0
+fi
+
+setup-warsow-folder
+build-qfusion
+
+if has-args "-r" "--run"; then
+  run-warsow "${@}"
+fi
+
+log-action "Done!"

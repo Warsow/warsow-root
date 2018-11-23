@@ -1,0 +1,18 @@
+# Set default behaviour, in case users don't have core.autocrlf set.
+* text=auto eol=lf
+
+# Text files with CRLF
+*.sln text eol=crlf
+*.rc text eol=crlf
+*.vcxproj text eol=crlf
+*.vcxproj.* text eol=crlf
+*.vcproj text eol=crlf
+*.dsp text eol=crlf
+*.dsw text eol=crlf
+*.vc text eol=crlf
+
+# Binary files
+*.ico binary
+*.lib binary
+*.so binary
+*.a binary
