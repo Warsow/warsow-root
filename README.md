@@ -1,8 +1,11 @@
-# Warsow Builder
-
-> Build environment for Warsow.
+# Warsow Root
 
 This project provides you with scripts to build the latest version of Warsow.
+
+
+## `bin/warsow`
+
+Alias for `bin/warsow-builder --run`
 
 
 ## `bin/warsow-builder`
@@ -14,6 +17,9 @@ Currently, this script does the following:
 
 ```
 Usage: bin/warsow-builder [(-r --run)] [(-c --clean)] ...
+
+Example:
+  bin/warsow-builder --run +set developer 1
 ```
 
 It creates two new directories:
@@ -24,11 +30,11 @@ It creates two new directories:
 You can put your configs, extra maps or other data into `warsow-home-data`.
 
 
-### `bin/warsow (-r --run)`
+### `bin/warsow-builder (-r --run)`
 
 Runs Warsow after a successful build.
 
 
-### `bin/warsow (-c --clean)`
+### `bin/warsow-builder (-c --clean)`
 
 Removes `build/warsow` folder.
