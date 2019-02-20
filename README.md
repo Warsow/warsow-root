@@ -37,4 +37,4 @@ Runs Warsow after a successful build.
 
 ### `bin/warsow-builder (-c --clean)`
 
-Removes `build/warsow` folder.
+Removes `build/warsow` and cleans `qfusion` folder.

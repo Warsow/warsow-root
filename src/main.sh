@@ -11,7 +11,7 @@ THREADS="$(nproc)"
 export MAKEFLAGS="${MAKEFLAGS} -j ${THREADS}"
 
 
-##  Functions
+##  Tasks
 ## --------------------------------------------------------
 
 setup-warsow-folder() {
@@ -21,6 +21,7 @@ setup-warsow-folder() {
   log-action "Creating warsow folder"
   mkdir -p "${WARSOW_DIR}"/{basewsw,libs}
   mkdir -p "${WARSOW_HOME_DIR}"
+  log-action "Copying assets"
   rsync -a "${MODULE_DIR}"/warsow-assets/ "${WARSOW_DIR}"/basewsw
   rsync -a "${MODULE_DIR}"/warsow-assets-asprogs/ "${WARSOW_DIR}"/basewsw/progs
   rsync -a "${MODULE_DIR}"/warsow-assets-glsl/ "${WARSOW_DIR}"/basewsw/glsl
@@ -32,8 +33,9 @@ clean-warsow-folder() {
   log-action "Cleaning warsow folder"
   rm -rf "${WARSOW_DIR}"
   log-action "Cleaning qfusion folder"
-  cd "${MODULE_DIR}/qfusion"
+  enter-dir "${MODULE_DIR}/qfusion"
   git clean -dxf
+  leave-dir
 }
 
 # copy-warsow-binaries() {
@@ -48,7 +50,11 @@ build-qfusion() {
   retrieve-modules qfusion
   log-action "Building qfusion"
   enter-dir "${MODULE_DIR}/qfusion/source"
-  cmake . -DQFUSION_GAME=Warsow -DCMAKE_C_FLAGS="-DPUBLIC_BUILD"
+  if has-args "--public-build"; then
+    cmake . -DQFUSION_GAME=Warsow -DCMAKE_C_FLAGS="-DPUBLIC_BUILD"
+  else
+    cmake . -DQFUSION_GAME=Warsow
+  fi
   make
   leave-dir
   log-action "Copying qfusion binaries"
